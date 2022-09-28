@@ -1,0 +1,28 @@
+@import "custom.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+* {
+  box-sizing: border-box;
+}
+.navbar {
+  padding: 20px;
+  margin: 25px 25px 0 25px;
+}
+
+main {
+  .card {
+    background-color: $primary;
+  }
+
+  .col-4 {
+    .card {
+      height: 300px;
+    }
+  }
+}
+
+.card-img-overlay {
+  img {
+    object-fit: cover !important;
+  }
+}

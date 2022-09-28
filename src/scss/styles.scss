@@ -1,0 +1,77 @@
+@import "custom.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+* {
+  box-sizing: border-box;
+}
+.navbar {
+  padding: 20px;
+  margin: 25px 25px 0 25px;
+}
+
+.loginForm {
+  background-color: $primary;
+  padding: 20px;
+  width: 35%;
+  margin: 0 auto;
+  border-radius: 25px;
+  margin-top: 20vh;
+  z-index: 1;
+  position: relative;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .form-inputs {
+    margin: 0 auto;
+    margin-bottom: 1em;
+  }
+
+  .btn {
+    background-color: $secondary;
+    border: none;
+    display: flex;
+    margin: 0 auto;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
+.background-image {
+  width: 100%;
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-top: -500px;
+  }
+
+  .float-start {
+    margin-top: -350px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .loginForm {
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .background-image {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .loginForm {
+    width: 70%;
+  }
+
+  .navbar a img {
+    width: 130px;
+  }
+}
