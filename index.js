@@ -1,14 +1,26 @@
-const registerAPI = "https://nf-api.onrender.com/api/v1/social/auth/register";
+import { url } from "./parameter.mjs";
+const email = document.getElementById("#email");
+const username = document.getElementById("#username");
+const password = document.getElementById("#inputPassword");
+const button = document.getElementById("#submit");
 
-const requestNewUser = {
-  method: "POST",
-  body: JSON.stringify({
-    name: "${user.name}",
-    email: "${user.email}",
-    password: "${user.password}",
-  }),
-};
-
-fetch(registerAPI, requestNewUser)
-  .then((response) => response.json())
-  .then((json) => console.log(json));
+async function registerUser() {
+  try {
+    const response = await fetch(url + "/social/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "Gabriel",
+        email: "GabZou91103@stud.noroff.no",
+        password: "testpassword",
+      }),
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+registerUser(username, email, password);
