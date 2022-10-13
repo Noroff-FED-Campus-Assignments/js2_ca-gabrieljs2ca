@@ -14,7 +14,8 @@ const options = {
 const response = await fetch(url + "/social/posts", options);
 const data = await response.json();
 const posts = data.map((post) => {
-  return (allPosts.innerHTML += ` <div class="card mb-5 text-white">
+  if (!(post.media === "")) {
+    return (allPosts.innerHTML += ` <div class="card mb-5 text-white">
         <div class="card-body">
         <div class="d-flex">
         <h5 class="card-title"><a href="detailedpost.html?id=${post.id}">${post.title}</a></h5>
@@ -24,6 +25,9 @@ const posts = data.map((post) => {
         <img src="${post.media}" class="card-img-bottom p-3 rounded-5" alt="..." />
         
         </div>`);
+  } else {
+    console.log(post.media, "post  body");
+  }
 });
 console.log(data);
 
@@ -40,18 +44,20 @@ async function handleSubmit(event) {
   console.log(createTitle.value, createBody.value);
   event.preventDefault();
   try {
-    const postUpload = await fetch(url + "/social/posts", options, {
+    const postUpload = await fetch(url + "/social/posts", {
       method: "POST",
-      body: JSON.stringify({
-        title: createTitle.toString(), // Required
-        body: createBody.toString(), // Required
-        media: createImage.toString(), // Optional
-      }),
       headers: {
         "content-type": "application/json; charset=UTF-8",
+        Authorization: "bearer" + " " + bearerToken,
       },
+      body: JSON.stringify({
+        title: createTitle.value, // Required
+        body: createBody.value, // Required
+        media: createImage.value, // Optional
+      }),
     });
     const response = await postUpload.json();
+    console.log(response);
   } catch (e) {
     console.log(e);
   }
