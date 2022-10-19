@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main page for basalt</title>
+    <title>Document</title>
     <link rel="stylesheet" href="dist/css/main.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -13,10 +13,15 @@
       crossorigin="anonymous"
     />
   </head>
-  <header>
+  <body>
+    <header>
     <nav class="navbar">
-      <a href="#"><img src="img/BASALTbasalt.svg" alt="" /></a>
+      <a href="main.html"><img src="img/BASALTbasalt.svg" alt="" /></a>
       <input type="text" id="searchBar" placeholder="Search for posts..." />
+      <a href="#" class="nav-link">
+        Gabriel Zouad
+        <img class="bi pe-none me-2 rounded-circle" width="48" height="48" src="img/bildeavmeg.jfif" />
+      </a>
     </nav>
   </header>
   <body>
@@ -45,30 +50,17 @@
         </li>
       </ul>
     </div>
+    <main class="mx-auto">
+        <div class="post">
+          <div id="modifiers">
 
+          </div>
+        </div>
+    </main>
     <div class="background-image">
       <img src="img/basaltright.svg" alt="basalt" class="float-end" />
       <img src="img/basaltleft.svg" alt="basalt" class="float-start" />
     </div>
-
-    <main class="mx-auto">
-      <div>
-        <form>
-          <input type="text" id="title" name="title" />
-          <input type="text" id="bodyText" name="body" />
-          <input type="text" id="bildeURL" name="media" />
-          <input type="submit" id="createPost" />
-        </form>
-      </div>
-      <div class="posts"></div>
-    </main>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
-
-    <script type="module" src="js/main.js"></script>
-  </body>
+    <script type="module" src="js/detailedpost.js"></script>
+</body>
 </html>
