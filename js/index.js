@@ -1,17 +1,18 @@
 import { url } from "./parameter.mjs";
-const email = document.getElementById("#email");
-const username = document.getElementById("#username");
-const password = document.getElementById("#inputPassword");
-const button = document.getElementById("#submit");
+const email = document.getElementById("email");
+const username = document.getElementById("username");
+const password = document.getElementById("inputPassword");
+const buttonDOM = document.getElementById("submit");
 
-async function registerUser() {
+async function registerUser(e) {
+  e.preventDefault();
   try {
     const response = await fetch(url + "/social/auth/register", {
       method: "POST",
       body: JSON.stringify({
-        name: "Gabriel",
-        email: "GabZou91103@stud.noroff.no",
-        password: "testpassword",
+        name: username.value,
+        email: email.value,
+        password: password.value,
       }),
       headers: {
         "content-type": "application/json; charset=UTF-8",
@@ -23,4 +24,5 @@ async function registerUser() {
     console.log(err);
   }
 }
-registerUser(username, email, password);
+
+buttonDOM.addEventListener("click", registerUser);

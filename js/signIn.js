@@ -1,11 +1,10 @@
 import { url } from "./parameter.mjs";
 
-const email = document.getElementById("#email");
-const password = document.getElementById("#inputPassword");
-const domBtnSubmit = document.getElementById("#submit");
+const email = document.getElementById("email");
+const password = document.getElementById("inputPassword");
+const loginFormDOM = document.querySelector("form");
 
-async function loginSubmitHandler(e) {
-  e.preventDefault();
+async function loginSubmitHandler(event) {
   try {
     const response = await fetch(url + "/social/auth/login", {
       method: "POST",
@@ -21,10 +20,19 @@ async function loginSubmitHandler(e) {
     const { name, accessToken } = await response.json();
     localStorage.setItem("userName", name);
     localStorage.setItem("accessToken", accessToken);
-    console.log(name, accessToken);
+    console.log(response);
+
+    if (response.status === 200) {
+      window.location.href = ".././main.html";
+    } else {
+      console.log(response.status);
+    }
   } catch (e) {
     console.log(e);
   }
 }
 
-domBtnSubmit.addEventListener("click", loginSubmitHandler);
+loginFormDOM.addEventListener("submit", (e) => {
+  e.preventDefault();
+  loginSubmitHandler();
+});

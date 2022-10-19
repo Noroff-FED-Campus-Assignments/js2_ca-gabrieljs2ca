@@ -53,3 +53,26 @@ async function createProfile() {
   }
 }
 createProfile();
+
+const userPostsDOM = document.getElementById("userPosts");
+
+const response = await fetch(url + "/social/posts/?_author=true", options);
+const data = await response.json();
+
+for (const post of data) {
+  const postAuthor = post.author;
+  if (postAuthor.name === username) {
+    userPostsDOM.innerHTML += ` <div class="card mb-5 text-white">
+        <div class="card-body">
+        <div class="d-flex">
+        <h5 class="card-title"><a href="detailedpost.html?id=${post.id}">${post.title}</a></h5>
+        </div>
+        <p class="card-text">${post.body}</p>
+        </div>
+        <img src="${post.media}" class="card-img-bottom p-3 rounded-5" alt="..." />
+        
+        </div>`;
+  } else {
+    null;
+  }
+}

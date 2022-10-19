@@ -31,9 +31,9 @@ if (userInfo.avatar === null) {
 
 const response = await fetch(url + "/social/posts", options);
 const data = await response.json();
-const posts = data.map((post) => {
-  if (!(post.media === "")) {
-    return (allPosts.innerHTML += ` <div class="card mb-5 text-white">
+for (const post of data) {
+  if (!(post.media === "" || post.media === null)) {
+    allPosts.innerHTML += ` <div class="card mb-5 text-white">
         <div class="card-body">
         <div class="d-flex">
         <h5 class="card-title"><a href="detailedpost.html?id=${post.id}">${post.title}</a></h5>
@@ -42,11 +42,11 @@ const posts = data.map((post) => {
         </div>
         <img src="${post.media}" class="card-img-bottom p-3 rounded-5" alt="..." />
         
-        </div>`);
+        </div>`;
   } else {
     console.log("no image");
   }
-});
+}
 
 // Lager en ny post og legger den ut.
 
@@ -59,7 +59,7 @@ async function handleSubmit(event) {
   console.log(createTitle.value, createBody.value);
   event.preventDefault();
   try {
-    const postUpload = await fetch(url + "/social/posts", {
+    const postUserToApi = await fetch(url + "/social/posts", {
       method: "POST",
       headers: {
         "content-type": "application/json; charset=UTF-8",
@@ -71,8 +71,9 @@ async function handleSubmit(event) {
         media: createImage.value, // Optional
       }),
     });
-    const response = await postUpload.json();
+    const response = await postUserToApi.json();
     console.log(response);
+    window.location.reload(false);
   } catch (e) {
     console.log(e);
   }
