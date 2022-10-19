@@ -53,7 +53,7 @@ const posts = data.map((post) => {
 const createTitle = document.getElementById("title");
 const createBody = document.getElementById("bodyText");
 const createImage = document.getElementById("bildeURL");
-const createButton = document.getElementById("createPost");
+const createButtonDOM = document.getElementById("createPost");
 
 async function handleSubmit(event) {
   console.log(createTitle.value, createBody.value);
@@ -78,4 +78,4 @@ async function handleSubmit(event) {
   }
 }
 
-createButton.addEventListener("click", handleSubmit);
+createButtonDOM.addEventListener("click", handleSubmit);
