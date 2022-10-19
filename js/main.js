@@ -1,8 +1,9 @@
 import { url } from "./parameter.mjs";
 
+const navbarDOM = document.querySelector(".navbar");
 const allPosts = document.querySelector(".posts");
 const bearerToken = localStorage.getItem("accessToken");
-const username = localStorage.getItem("username");
+const username = localStorage.getItem("userName");
 const searchBar = document.getElementById("searchBar");
 
 const options = {
@@ -10,6 +11,23 @@ const options = {
     Authorization: "bearer" + " " + bearerToken,
   },
 };
+
+// henter brukerinformasjonen til den som er logget inn.
+
+const userResponse = await fetch(url + "/social/profiles/" + username, options);
+const userInfo = await userResponse.json();
+if (userInfo.avatar === null) {
+  navbarDOM.innerHTML += `<a href="#" class="nav-link">
+    ${username}
+    <img class="bi pe-none me-2 rounded-circle" width="48" height="48" src="../img/usericon.png" />
+    </a>`;
+} else {
+  userInfo.innerHTML += `<a href="profile.html${username}" class="nav-link">${username}
+    <img class="bi pe-none me-2 rounded-circle" width="48" height="48" src="${userInfo.avatar}" />
+    </a>`;
+}
+
+// lager posts på nettsiden
 
 const response = await fetch(url + "/social/posts", options);
 const data = await response.json();
@@ -26,14 +44,11 @@ const posts = data.map((post) => {
         
         </div>`);
   } else {
-    console.log(post.media, "post  body");
+    console.log("no image");
   }
 });
-console.log(data);
 
-// function filterPosts(posts) {
-//   return post.filter((post) => post.toLowerCase().includes(keyword.toLowerCase()));
-// }
+// Lager en ny post og legger den ut.
 
 const createTitle = document.getElementById("title");
 const createBody = document.getElementById("bodyText");

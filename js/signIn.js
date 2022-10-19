@@ -18,6 +18,7 @@ domBtnSubmit.addEventListener("click", (e) => {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
+
       const { name, accessToken } = await response.json();
       localStorage.setItem("userName", name);
       localStorage.setItem("accessToken", accessToken);
